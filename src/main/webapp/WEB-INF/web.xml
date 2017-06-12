@@ -4,4 +4,14 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+
+	<servlet>
+		<servlet-name>Servlet Name For Demo1</servlet-name>
+		<servlet-class>com.parser.ParserServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Servlet Name For Demo1</servlet-name>
+		<url-pattern>/parse</url-pattern>
+	</servlet-mapping>
 </web-app>
