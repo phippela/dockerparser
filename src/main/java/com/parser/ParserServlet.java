@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class ParserServlet extends HttpServlet{
 
-	public void doGe(HttpServletRequest request, HttpServletResponse response)
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
 	throws IOException{
 		PrintWriter out = response.getWriter();
 		out.println("<html>");
