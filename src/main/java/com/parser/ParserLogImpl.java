@@ -26,10 +26,7 @@ public class ParserLogImpl implements ParserLog {
 
 	// TODO consider removing will create extra objects just...
 	public void printWithAakkoset(String s) {
-		PrintWriter pw = new PrintWriter(System.out);
-		pw.println(s);
-		pw.flush();
-		pw.close();
+		System.out.println(""+s);
 	}
 	
 	public String exceptionToString(Exception e) {
