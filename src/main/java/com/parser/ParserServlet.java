@@ -11,6 +11,8 @@ import javax.servlet.http.*;
 
 public class ParserServlet extends HttpServlet{
 
+  private Parser parser = new ConluParser();
+
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 	throws IOException{
 		PrintWriter out = response.getWriter();
@@ -56,20 +58,32 @@ public String getBody(HttpServletRequest request) throws Exception {
 public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException,
 ServletException {
 
-PrintWriter out  = null;
+  PrintWriter out  = null;
   try {
 		out = response.getWriter();
 
     String body = getBody(request);
+
+
+    // This will read sentences to own list
+    // Sentence is endedn by ? ! or .
+    List in = parser.paser(body);
+    // step 1
+    //luokka2.tee(in)
+    // step 2
+    //luokka2.tee(in)
+
   	out.println("<html>");
 		out.println("<body>");
 		out.println("<h1>Hello Servlet Post</h1>");
-    out.println(""+body);
-		out.println("</body>");
+    for(int i = 0; i< in.size(); i++) {
+      out.println((i+1)+":"+in.get(i));
+    }
+    out.println("</body>");
 		out.println("</html>");
-} catch (Exception e) {
-  e.printStackTrace(out);
+  } catch (Exception e) {
+    e.printStackTrace(out);
+  }
 }
 
-	}
 }
