@@ -11,8 +11,6 @@ import javax.servlet.http.*;
 
 public class ParserServlet extends HttpServlet{
 
-  private Parser parser = new ConluParser();
-
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 	throws IOException{
 		PrintWriter out = response.getWriter();
@@ -62,12 +60,14 @@ ServletException {
   try {
 		out = response.getWriter();
 
+    com.parser.Parser parser = new ConluParser();
+
     String body = getBody(request);
 
 
     // This will read sentences to own list
     // Sentence is endedn by ? ! or .
-    List in = parser.paser(body);
+    List in = parser.parse(body);
     // step 1
     //luokka2.tee(in)
     // step 2

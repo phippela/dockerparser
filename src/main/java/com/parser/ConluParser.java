@@ -3,7 +3,7 @@ package com.parser;
 import java.util.*;
 import java.io.*;
 
-public class ConluParser implements Parser {
+public class ConluParser implements com.parser.Parser {
 
 	public static final boolean DEBUG = false;
 
@@ -18,6 +18,9 @@ public class ConluParser implements Parser {
 		System.out.println("We"
 				+ " are parsing...");
 
+// LE dummy implementation
+				returnList.add(inFile);
+				/*
 		// this is for checking that all lines are of the same length
 		int previousLength = -1;
 		int currentLength = 0;
@@ -78,7 +81,7 @@ public class ConluParser implements Parser {
 
 				line = br.readLine();
 		}
-
+*/
 
 		return returnList;
 	}
