@@ -7,6 +7,12 @@ public class ConluParser implements com.parser.Parser {
 
 	public static final boolean DEBUG = false;
 
+	private com.parser.ParserLog log = null;
+	
+	public ConluParser(ParserLog logComponent) {
+		this.log = logComponent;
+	}
+	
   // This asssumes that in file is dot ''.'' exclamanation '! or question
   // marks separated '?''
   //
@@ -14,8 +20,8 @@ public class ConluParser implements com.parser.Parser {
   // As a result will be that each sentence is on list of its own.
   public List parse(String inFile) throws Exception {
 		List returnList = new ArrayList();
-
-		System.out.println("We"
+		
+		log.info("We" 
 				+ " are parsing...");
 
 // LE dummy implementation a

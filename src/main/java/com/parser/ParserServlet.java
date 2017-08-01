@@ -9,10 +9,24 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-public class ParserServlet extends HttpServlet{
+public class ParserServlet extends HttpServlet {
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-	throws IOException{
+	public static final boolean DEBUG = false;
+
+	// Add here all the dependenices used
+	private com.parser.Parser parser = null;
+	private com.parser.Filter filter = null;
+	private com.parser.ParserLog log = null;
+	
+	public void init(ServletConfig config) throws ServletException {
+	    super.init(config);
+	    System.out.println("Init called");
+	    this.log = new com.parser.ParserLogImpl();
+	    this.parser = new ConluParser(log);    
+	    this.filter = new com.parser.FilterImpl(log);  	   
+	}
+	
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		PrintWriter out = response.getWriter();
 		out.println("<html>");
 		out.println("<body>");
@@ -21,69 +35,44 @@ public class ParserServlet extends HttpServlet{
 		out.println("</html>");
 	}
 
-public String getBody(HttpServletRequest request) throws Exception {
 
-  BufferedReader bufferedReader = null;
-  StringBuffer stringBuilder = new StringBuffer();
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-  try {
-      InputStream inputStream = request.getInputStream();
-      if (inputStream != null) {
-          bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"ISO-8859-1"));
-          char[] charBuffer = new char[128];
-          int bytesRead = -1;
-          while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
-              stringBuilder.append(charBuffer, 0, bytesRead);
-          }
-      } else {
-          stringBuilder.append("");
-      }
-  } catch (IOException ex) {
-      throw ex;
-  } finally {
-      if (bufferedReader != null) {
-          try {
-              bufferedReader.close();
-          } catch (IOException ex) {
-              throw ex;
-          }
-      }
-  }
+		long start = System.currentTimeMillis();
+		
+		log.info("Starting to process new request");
+		PrintWriter out = null;
+		try {
+			out = response.getWriter();
 
-  return stringBuilder.toString();
-}
+			// This will read sentences to own list
+			// Sentence is ended by ? ! or .
+			String body = filter.getBody(request);
+		
+			List in = parser.parse(body);
+			// step 1
+			// luokka2.tee(in)
+			// step 2
+			// luokka2.tee(in)
 
-public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException,
-ServletException {
-
-  PrintWriter out  = null;
-  try {
-		out = response.getWriter();
-
-    com.parser.Parser parser = new ConluParser();
-
-    String body = getBody(request);
-
-
-    // This will read sentences to own list
-    // Sentence is endedn by ? ! or .
-    List in = parser.parse(body);
-    // step 1
-    //luokka2.tee(in)
-    // step 2
-    //luokka2.tee(in)
-
-  	out.println("<html>");
-		out.println("<body>");
-		out.println("<h1>Hello Servlet Post</h1>");
-    for(int i = 0; i< in.size(); i++) {
-      out.println((i+1)+":"+in.get(i));
-    }
-    out.println("</body>");
-		out.println("</html>");
-  } catch (Exception e) {
-    e.printStackTrace(out);
-  }
-}
+			log.info("...writing parsing result to output stream");
+			out.println("<html>");
+			out.println("<body>");
+			out.println("<h1>Hello Servlet Post</h1>");
+			for (int i = 0; i < in.size(); i++) {
+				out.println((i + 1) + ":" + in.get(i));
+				log.debug(""+in.get(i));
+			}
+			out.println("</body>");
+			out.println("</html>");
+			out.flush();
+			out.close();
+			long end = System.currentTimeMillis();
+			
+			log.info("Request processing complete. (in "+ (end-start)+" ms)");
+		} catch (Exception e) {
+			log.error("Error caught in the servlet",e);			
+		}
+	}
 
 }
