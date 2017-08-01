@@ -6,17 +6,17 @@ import java.io.StringWriter;
 public class ParserLogImpl implements ParserLog {
 
 	public void debug(String message) {
-		System.out.println("Debug: "+message);
+		printWithAakkoset("Debug: "+message);
 
 	}
 
 	public void info(String message) {
-		System.out.println("Info: "+message);
+		printWithAakkoset("Info: "+message);
 
 	}
 
 	public void error(String message) {
-		System.out.println("Info: "+message);
+		printWithAakkoset("Info: "+message);
 	}
 
 	public void error(String message, Exception e) {
@@ -24,6 +24,14 @@ public class ParserLogImpl implements ParserLog {
 		
 	}
 
+	// TODO consider removing will create extra objects just...
+	public void printWithAakkoset(String s) {
+		PrintWriter pw = new PrintWriter(System.out);
+		pw.println(s);
+		pw.flush();
+		pw.close();
+	}
+	
 	public String exceptionToString(Exception e) {
 		new StringBuffer();
 		StringWriter sw = new StringWriter();
