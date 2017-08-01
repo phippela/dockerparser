@@ -5,7 +5,6 @@ import java.io.*;
 
 public class ConluParser implements com.parser.Parser {
 
-	public static final boolean DEBUG = false;
 
 	private com.parser.ParserLog log = null;
 	
@@ -24,9 +23,10 @@ public class ConluParser implements com.parser.Parser {
 		log.info("We" 
 				+ " are parsing...");
 
-// LE dummy implementation a
-				returnList.add(inFile);
-				/*
+		// dummy implementation
+		// returnList.add(inFile);
+		
+		/*
 		// this is for checking that all lines are of the same length
 		int previousLength = -1;
 		int currentLength = 0;
@@ -34,18 +34,19 @@ public class ConluParser implements com.parser.Parser {
 			    new FileInputStream(""+inFile), "ISO-8859-1"));
 
 		String line = br.readLine();
+		*/
+
 		int lineNumber = 0;
 		boolean previousWasToken = true;
-		while(line!=null) {
-			currentLength = 0;
+		// in here we eat delimiters, and plan to add "." after each clause
+		StringTokenizer st = new StringTokenizer(inFile,"?!.",false);
+		
+		while(st.hasMoreTokens()) {
 			lineNumber++;
-
-			if(DEBUG)
-				System.out.println(""+line);
-
-			StringTokenizer st = new StringTokenizer("start;"+line+";end",";",true);
-			//String[] tokens = line.split(";");
-
+			String lause = st.nextToken().trim();
+			log.debug(lineNumber+":"+lause);
+			
+			/*
 			List tempList = new ArrayList();
 
 			while(st.hasMoreTokens()) {
@@ -83,11 +84,11 @@ public class ConluParser implements com.parser.Parser {
 				}
 
 				previousLength = tempList.size();
-				returnList.add(array);
+				*/
+				returnList.add(lause+".");
 
-				line = br.readLine();
+				//line = br.readLine();
 		}
-*/
 
 		return returnList;
 	}
