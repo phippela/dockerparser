@@ -13,7 +13,7 @@ public class ParserServlet extends HttpServlet {
 
 	public static final boolean DEBUG = false;
 
-	// Add here all the dependenices used
+	// Add here all the dependencies used
 	private com.parser.Parser parser = null;
 	private com.parser.Filter filter = null;
 	private com.parser.ParserLog log = null;
@@ -26,11 +26,12 @@ public class ParserServlet extends HttpServlet {
 	    this.filter = new com.parser.FilterImpl(log);  	   
 	}
 	
+	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		PrintWriter out = response.getWriter();
 		out.println("<html>");
 		out.println("<body>");
-		out.println("<h1>Hello Servlet Get 3</h1>");
+		out.println("<h1>K‰yt‰ post meotodia v‰litt‰‰ksesi parsittavan dokumentin.</h1>");
 		out.println("</body>");
 		out.println("</html>");
 	}

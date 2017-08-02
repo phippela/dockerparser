@@ -5,6 +5,11 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
 
+ 	<listener>
+	<listener-class>
+             com.parser.ParserContextListener
+        </listener-class>
+   </listener>
 	<servlet>
 		<servlet-name>Servlet Name For Demo1</servlet-name>
 		<servlet-class>com.parser.ParserServlet</servlet-class>
