@@ -57,15 +57,15 @@ public class ParserServlet extends HttpServlet {
 			// luokka2.tee(in)
 
 			log.info("...writing parsing result to output stream");
-			out.println("<html>");
-			out.println("<body>");
-			out.println("<h1>Hello Servlet Post</h1>");
+			//out.println("<html>");
+			//out.println("<body>");
+			//out.println("<h1>Hello Servlet Post</h1>");
 			for (int i = 0; i < in.size(); i++) {
 				out.println((i + 1) + ":" + in.get(i));
 				log.debug(""+in.get(i));
 			}
-			out.println("</body>");
-			out.println("</html>");
+			//out.println("</body>");
+			//out.println("</html>");
 			out.flush();
 			out.close();
 			long end = System.currentTimeMillis();

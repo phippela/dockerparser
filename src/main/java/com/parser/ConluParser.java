@@ -33,7 +33,7 @@ public class ConluParser implements com.parser.Parser {
 			log.debug(lineNumber+":"+lause);
 
 			// then we want to split this lause into words
-			StringTokenizer wordt = new StringTokenizer(inFile,", ",false);
+			StringTokenizer wordt = new StringTokenizer(lause,", ",false);
 			List list = new ArrayList();
 			while(wordt.hasMoreTokens()) {
 				String word = wordt.nextToken().trim();		
@@ -76,8 +76,8 @@ public class ConluParser implements com.parser.Parser {
 		lause.add(".");
 		// TODO add cache
 		// TODO add parsing call
-		for(int i = 0 ; i < returnList.size() ; i ++) {
-			returnList.add(returnList.get(i)+ " * * * * * * * * *");
+		for(int i = 0 ; i < lause.size() ; i ++) {
+			returnList.add(lause.get(i)+ " * * * * * * * * *");
 		}		
 	}
 
