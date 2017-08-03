@@ -9,6 +9,8 @@ import is2.data.*;
 import is2.parser.ParametersFloat;
 import java.io.*;
 
+// This is stub for 'Turku' parser - however this is no longer continued
+// To support one should implemente the tag.sh functionality as an input.
 public class ParserWrapperImpl extends Parser implements ParserWrapper {
 
 	// lets initialize the parser

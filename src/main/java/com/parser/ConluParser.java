@@ -7,13 +7,23 @@ import java.io.*;
 public class ConluParser implements com.parser.Parser {
 
 	private com.parser.ParserLog log = null;
-	private com.parser.ParserWrapper parserWrapper = null;
+	private com.parser.ParserCache cache = null;
+
+	// for turku parser
+	//private com.parser.ParserWrapper parserWrapper = null;
 	
+	/*for turku parser
 	public ConluParser(ParserLog logComponent, ParserWrapper inWrapper) {
 		this.log = logComponent;
 		this.parserWrapper = inWrapper;
 	}
+	*/
 
+	public ConluParser(ParserLog logComponent, ParserCache incache) {
+		this.log = logComponent;
+		this.cache = incache;
+	}
+	
 	// This will creat list of lists. Each sub list contains words for the corresponding clause.
 	public List convertInputToList(String inFile) throws Exception  {
 
@@ -93,16 +103,16 @@ public class ConluParser implements com.parser.Parser {
 		}	
 		
 		long start = System.currentTimeMillis();
-		StringWriter sw = new StringWriter();
-		String input = sb.toString();
-		log.debug("input:\n"+input);
-		StringReader sr = new StringReader(input);
-		log.debug("Calling parser wrapper");
-		parserWrapper.parsi(sr,sw);
+		//StringWriter sw = new StringWriter();
+		//String input = sb.toString();
+		//log.debug("input:\n"+input);
+		//StringReader sr = new StringReader(input);
+		//log.debug("Calling parser wrapper");
+		//parserWrapper.parsi(sr,sw);
 		log.debug("...parsing complete (in "+(System.currentTimeMillis() - start)+"ms)");
-		String output = sw.toString();
-		returnList.add(output); 
-
+		//String output = sw.toString();
+		//returnList.add(output); 
+		returnList.add(sb.toString());
 	}
 
 }

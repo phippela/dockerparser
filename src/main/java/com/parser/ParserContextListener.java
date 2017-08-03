@@ -27,6 +27,7 @@ public class ParserContextListener
 		
 		// TODO add here cache initialization
 		getLog().info("ParserContextListener started");
+		/* hook for the Turku parser
 		com.parser.ParserWrapperImpl parserWrapper= null;
 		String[] args = new String[6];
 		args[0] = "-model";
@@ -39,5 +40,9 @@ public class ParserContextListener
 	    parserWrapper = new ParserWrapperImpl(args);
 	    getLog().info("Parser wrapper initialized (model read)");
 	    arg0.getServletContext().setAttribute("parserwrapper", parserWrapper);
+	    */
+		ParserCache cache = new SimpleCache();
+		arg0.getServletContext().setAttribute("cache", cache);
+		
 	}
 }

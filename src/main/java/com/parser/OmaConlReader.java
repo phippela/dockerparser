@@ -14,7 +14,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 
-// Lets hack a way
+// this for turku parser, not currently used
 public class OmaConlReader extends IOGenerals {
 
 
