@@ -23,7 +23,8 @@ public class ParserServlet extends HttpServlet {
 	    super.init(config);
 	    System.out.println("Init called");
 	    this.log = new com.parser.ParserLogImpl();
-	    parserWrapper = (ParserWrapper) config.getServletContext().getAttribute("parserWrapper");
+	    parserWrapper = (ParserWrapper) config.getServletContext().getAttribute("parserwrapper");
+	    System.out.println("We got parserWrapper:"+(parserWrapper!=null));
 	    this.parser = new ConluParser(log, parserWrapper);    
 	    this.filter = new com.parser.FilterImpl(log);
 			    
