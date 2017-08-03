@@ -82,16 +82,19 @@ public class ConluParser implements com.parser.Parser {
 		StringBuffer sb = new StringBuffer();
 
 		for(int i = 0 ; i < lause.size() ; i ++) {
-						sb.append((i+1)+"\t"+lause.get(i));
+				sb.append((i+1)+"\t"+lause.get(i));
 			for(int j = 0 ; j <12 ; j++) {
 				sb.append("\t-");
 			}
-			sb.append("\n");
+			// Lets not add \n to the last line
+			if(i<lause.size()-1);
+				sb.append("\n");
 		}	
 		
 		long start = System.currentTimeMillis();
 		StringWriter sw = new StringWriter();
 		String input = sb.toString();
+		log.debug("input:\n"+input);
 		StringReader sr = new StringReader(input);
 		log.debug("Calling parser wrapper");
 		parserWrapper.parsi(sr,sw);
