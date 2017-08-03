@@ -88,7 +88,7 @@ public class ConluParser implements com.parser.Parser {
 			}
 			// Lets not add \n to the last line
 			sb.append("\n");
-			if(i==lause.size()-1);
+			if(i== (lause.size()-1))
 				sb.append("\n");
 			
 		}	
