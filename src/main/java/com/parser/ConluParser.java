@@ -82,7 +82,7 @@ public class ConluParser implements com.parser.Parser {
 		StringBuffer sb = new StringBuffer();
 
 		for(int i = 0 ; i < lause.size() ; i ++) {
-				sb.append((i+1)+"\t"+lause.get(i));
+				sb.append((i+1)+"\t "+lause.get(i));
 			for(int j = 0 ; j <12 ; j++) {
 				sb.append("\t-");
 			}
