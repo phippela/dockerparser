@@ -87,8 +87,10 @@ public class ConluParser implements com.parser.Parser {
 				sb.append("\t-");
 			}
 			// Lets not add \n to the last line
-			if(i<lause.size()-1);
+			sb.append("\n");
+			if(i==lause.size()-1);
 				sb.append("\n");
+			
 		}	
 		
 		long start = System.currentTimeMillis();
