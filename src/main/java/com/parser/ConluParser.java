@@ -86,7 +86,7 @@ public class ConluParser implements com.parser.Parser {
 			for(int j = 0 ; j <12 ; j++) {
 				sb.append("\t-");
 			}
-			// Lets not add \n to the last line
+
 			sb.append("\n");
 			if(i== (lause.size()-1))
 				sb.append("\n");
@@ -103,7 +103,6 @@ public class ConluParser implements com.parser.Parser {
 		log.debug("...parsing complete (in "+(System.currentTimeMillis() - start)+"ms)");
 		String output = sw.toString();
 		returnList.add(output); 
-
 
 	}
 
