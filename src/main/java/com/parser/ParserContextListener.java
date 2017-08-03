@@ -27,5 +27,17 @@ public class ParserContextListener
 		
 		// TODO add here cache initialization
 		getLog().info("ParserContextListener started");
+		com.parser.ParserWrapperImpl parserWrapper= null;
+		String[] args = new String[6];
+		args[0] = "-model";
+		args[1] = "/usr/local/tomcat/parser.model";
+		args[2] = "-test";
+		args[3] = "/usr/local/tomcat/int.txt";
+		args[4] = "-out";
+		args[5] = "/usr/local/tomcat/out.txt";
+		getLog().info("Starting to initialize parser wrapper");
+	    parserWrapper = new ParserWrapperImpl(args);
+	    getLog().info("Parser wrapper initialized (model read)");
+	    arg0.getServletContext().setAttribute("parserwrapper", parserWrapper);
 	}
 }

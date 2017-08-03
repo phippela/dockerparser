@@ -3,13 +3,15 @@ package com.parser;
 import java.util.*;
 import java.io.*;
 
+
 public class ConluParser implements com.parser.Parser {
 
-
 	private com.parser.ParserLog log = null;
-
-	public ConluParser(ParserLog logComponent) {
+	private com.parser.ParserWrapper parserWrapper = null;
+	
+	public ConluParser(ParserLog logComponent, ParserWrapper inWrapper) {
 		this.log = logComponent;
+		this.parserWrapper = inWrapper;
 	}
 
 	// This will creat list of lists. Each sub list contains words for the corresponding clause.
@@ -60,12 +62,13 @@ public class ConluParser implements com.parser.Parser {
 		// Splitting input file to clauses. These in the end do not have correct punctuation mark ? . or !
 		List lauseetList = convertInputToList(inFile);
 
+		
 		// Lets go through each of the clauses, and parse them in own method
 		for(int i = 0 ; i < lauseetList.size(); i ++) {
 			List lause = (List) lauseetList.get(i);
 			processClause(lause,returnList);
 		}
-
+		
 		return returnList;
 	}
 	
@@ -77,8 +80,23 @@ public class ConluParser implements com.parser.Parser {
 		// TODO add cache
 		// TODO add parsing call
 		for(int i = 0 ; i < lause.size() ; i ++) {
-			returnList.add(lause.get(i)+ " * * * * * * * * *");
-		}		
+			StringBuffer sb = new StringBuffer();
+			sb.append((i+1)+"\t"+lause.get(i));
+			for(int j = 0 ; j <12 ; j++) {
+				sb.append("\t-");
+			}
+			StringWriter sw = new StringWriter();
+			StringReader sr = new StringReader(sb.toString());
+			log.debug("Calling parser wrapper");
+			parserWrapper.parsi(sr,sw);
+			log.debug("...parsing complete");
+			returnList.add(sw.toString()); 
+			
+		}	
+		
+		long start = System.currentTimeMillis();
+		
+
 	}
 
 }

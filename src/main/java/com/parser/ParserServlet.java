@@ -17,13 +17,16 @@ public class ParserServlet extends HttpServlet {
 	private com.parser.Parser parser = null;
 	private com.parser.Filter filter = null;
 	private com.parser.ParserLog log = null;
+	private com.parser.ParserWrapper parserWrapper = null;
 	
 	public void init(ServletConfig config) throws ServletException {
 	    super.init(config);
 	    System.out.println("Init called");
 	    this.log = new com.parser.ParserLogImpl();
-	    this.parser = new ConluParser(log);    
-	    this.filter = new com.parser.FilterImpl(log);  	   
+	    parserWrapper = (ParserWrapper) config.getServletContext().getAttribute("parserWrapper");
+	    this.parser = new ConluParser(log, parserWrapper);    
+	    this.filter = new com.parser.FilterImpl(log);
+			    
 	}
 	
 	
