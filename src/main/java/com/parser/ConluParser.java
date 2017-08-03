@@ -79,23 +79,26 @@ public class ConluParser implements com.parser.Parser {
 		lause.add(".");
 		// TODO add cache
 		// TODO add parsing call
+		StringBuffer sb = new StringBuffer();
+
 		for(int i = 0 ; i < lause.size() ; i ++) {
-			StringBuffer sb = new StringBuffer();
-			sb.append((i+1)+"\t"+lause.get(i));
+						sb.append((i+1)+"\t"+lause.get(i));
 			for(int j = 0 ; j <12 ; j++) {
 				sb.append("\t-");
 			}
-			StringWriter sw = new StringWriter();
-			StringReader sr = new StringReader(sb.toString());
-			log.debug("Calling parser wrapper");
-			parserWrapper.parsi(sr,sw);
-			log.debug("...parsing complete");
-			returnList.add(sw.toString()); 
-			
+			sb.append("\n");
 		}	
 		
 		long start = System.currentTimeMillis();
-		
+		StringWriter sw = new StringWriter();
+		String input = sb.toString();
+		StringReader sr = new StringReader(input);
+		log.debug("Calling parser wrapper");
+		parserWrapper.parsi(sr,sw);
+		log.debug("...parsing complete (in "+(System.currentTimeMillis() - start)+"ms)");
+		String output = sw.toString();
+		returnList.add(output); 
+
 
 	}
 
